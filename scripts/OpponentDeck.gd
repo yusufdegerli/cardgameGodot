@@ -7,7 +7,6 @@ const STARTING_HAND_SIZE = 5
 var opponent_deck = ["HumanArcher", "HumanWizard", "Skeleton", "HumanWizard", "HumanWizard", "HumanWizard", "Demon", "Demon"]
 var card_database_reference
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	"""
 	Başlangıçta çalışır.

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bqigo1pwbcjia" path="res://assets/CardSlot.png" id="2_sgymr"]
 
 [node name="CardSlot" type="Node2D"]
+z_index = -3
 position = Vector2(782, 205)
 script = ExtResource("1_8rtng")
 
