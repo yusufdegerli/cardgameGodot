@@ -13,6 +13,7 @@ var is_hovering_on_card
 var player_hand_reference
 var played_monster_card_this_turn = false
 var played_human_card_this_turn = false
+var selected_monster
 
 func _ready() -> void:
 	"""
@@ -41,6 +42,39 @@ func _process(delta: float) -> void:
 		card_being_dragged.position = Vector2(clamp(mouse_pos.x, 0, screen_size.x),
 			clamp(mouse_pos.y, 0, screen_size.y))
 
+func card_clicked(card):
+	# Card if card on battlefield or in hand
+	if card.card_slot_card_is_in:
+		if $"../BattleManager".is_opponents_turn == false:
+			if $"../BattleManager".player_is_attacking == false:
+				# Card on battlefield
+				if card not in $"../BattleManager".player_cards_that_attacked_this_turn:
+					if $"../BattleManager".opponent_cards_on_battlefield.size() == 0:
+						$"../BattleManager".direct_attack(card, "Player")
+						return
+					else:
+						select_card_for_battle(card)
+	else:
+		# Card in hand
+		start_drag(card)
+
+
+func select_card_for_battle(card):
+	# Check if monster already selected
+	if selected_monster:
+		# If this card already selected
+		if selected_monster == card:
+			card.position.y += 20
+			selected_monster = null
+		# If differenet card seleceted
+		else:
+			selected_monster.position.y += 20
+			selected_monster = card
+			card.position.y -= 20
+	else:
+		selected_monster = card
+		card.position.y -= 20
+	
 
 func start_drag(card):
 	"""
@@ -65,8 +99,6 @@ func finish_drag():
 	"""
 	card_being_dragged.scale = Vector2(CARD_BIGGER_SCALE, CARD_BIGGER_SCALE)
 	var card_slot_found = raycast_check_for_card_slot()
-	#print("MagicCardSlot.card_slot_type: ", MagicCardSlot.card_slot_type)
-	#if card_slot_found and card_slot_found.has_method("card_in_slot"): #chatgpt'nin
 	if card_slot_found and not card_slot_found.card_in_slot: # oc sorgu
 		if card_being_dragged.card_type == card_slot_found.card_slot_type:
 			if !played_human_card_this_turn:
@@ -79,14 +111,18 @@ func finish_drag():
 				card_being_dragged.card_slot_card_is_in = card_slot_found
 				player_hand_reference.remove_card_from_hand(card_being_dragged)
 				card_being_dragged.position = card_slot_found.position
-				card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 				card_slot_found.card_in_slot = true
+				card_slot_found.get_node("Area2D/CollisionShape2D").disabled = true
 				$"../BattleManager".player_cards_on_battlefield.append(card_being_dragged)
 				card_being_dragged = null
 				return
 	player_hand_reference.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
 	card_being_dragged = null
 
+func unselect_selected_monster():
+	if selected_monster:
+		selected_monster.position.y += 20
+		selected_monster = null
 
 func connect_card_signals(card):
 	"""
@@ -121,6 +157,8 @@ func on_hovered_over_card(card):
 		card : Node
 			Fareyle üzerine gelinen kart nesnesi.
 	"""
+	if card.card_slot_card_is_in:
+		return
 	if !is_hovering_on_card:
 		is_hovering_on_card = true
 		highlight_card(card, true)
@@ -138,15 +176,16 @@ func on_hovered_off_card(card):
 		card : Node
 			Fareyle üzerinden ayrılan kart nesnesi
 	"""
-	# Check if card is in a card slot
-	if !card.card_slot_card_is_in && !card_being_dragged:
-			#is_hovering_on_card = false
-			highlight_card(card, false)
-			var new_card_hovered = raycast_check_for_card()
-			if new_card_hovered:
-				highlight_card(new_card_hovered, true)
-			else:
-				is_hovering_on_card = false
+	if !card.defeated:
+		# Check if card is in a card slot
+		if !card.card_slot_card_is_in && !card_being_dragged:
+				#is_hovering_on_card = false
+				highlight_card(card, false)
+				var new_card_hovered = raycast_check_for_card()
+				if new_card_hovered:
+					highlight_card(new_card_hovered, true)
+				else:
+					is_hovering_on_card = false
 
 
 func highlight_card(card, hovered):
@@ -194,7 +233,7 @@ func raycast_check_for_card_slot():
 	parameters.collision_mask = COLLISION_MASK_CARD_SLOT
 	var result = space_state.intersect_point(parameters)
 	if result.size() > 0:
-		return result[0].collider.get_parent().get_parent()
+		return result[0].collider.get_parent()
 	return null
 
 
@@ -260,3 +299,7 @@ func get_card_with_highest_z_index(cards):
 
 func reset_played_monster():
 	played_monster_card_this_turn = false
+	
+	
+	
+	# 10. video. dakika 5.32. 113.'ü satırda hata var.

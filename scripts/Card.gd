@@ -6,6 +6,9 @@ signal hovered_off
 var starting_position
 var card_slot_card_is_in
 var card_type
+var health
+var attack
+var defeated = false
 
 func _ready() -> void:
 	"""

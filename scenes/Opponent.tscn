@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5w8gmftephlm"]
 
 [ext_resource type="Script" path="res://scripts/HumanCardSlot.gd" id="1_8rtng"]
-[ext_resource type="Texture2D" uid="uid://bqigo1pwbcjia" path="res://assets/CardSlot.png" id="2_sgymr"]
+[ext_resource type="Texture2D" uid="uid://xsl83dgyxbbw" path="res://assets/CardSlot.png" id="2_sgymr"]
 
 [node name="CardSlot" type="Node2D"]
 z_index = -3

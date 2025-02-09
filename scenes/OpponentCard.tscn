@@ -1,8 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ctdyhr71bptqc"]
 
 [ext_resource type="Script" path="res://scripts/OpponentCard.gd" id="1_bjq71"]
-[ext_resource type="Texture2D" uid="uid://cmf3bekqwgps1" path="res://assets/real_deck.png" id="2_03vl6"]
-[ext_resource type="Texture2D" uid="uid://bxvtlu5lo0w8g" path="res://assets/HumanSoldier.tres" id="3_n6mcw"]
+[ext_resource type="Texture2D" uid="uid://domskrd028rdn" path="res://assets/real_deck.png" id="2_03vl6"]
 [ext_resource type="FontFile" uid="uid://bcq55rv6noy7b" path="res://Tiny5-Regular.ttf" id="4_7duxn"]
 
 [sub_resource type="Animation" id="Animation_7fu2m"]
@@ -162,6 +161,9 @@ _data = {
 "card_flip": SubResource("Animation_snfqe")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tan2b"]
+size = Vector2(205, 242.5)
+
 [node name="Card" type="Node2D"]
 position = Vector2(1783.44, 130.5)
 scale = Vector2(0.8, 0.8)
@@ -176,7 +178,6 @@ texture = ExtResource("2_03vl6")
 z_index = -1
 position = Vector2(0.499997, 0.499982)
 scale = Vector2(0.796154, 0.757576)
-texture = ExtResource("3_n6mcw")
 
 [node name="Attack" type="RichTextLabel" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -185,8 +186,9 @@ offset_top = -117.0
 offset_right = -54.0
 offset_bottom = -64.0
 theme_override_fonts/normal_font = ExtResource("4_7duxn")
-theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/normal_font_size = 55
 text = "0"
+scroll_active = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Health" type="RichTextLabel" parent="."]
@@ -197,12 +199,21 @@ offset_right = 96.0
 offset_bottom = -63.0
 size_flags_stretch_ratio = 11.32
 theme_override_fonts/normal_font = ExtResource("4_7duxn")
-theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/normal_font_size = 55
 bbcode_enabled = true
 text = "0"
+scroll_active = false
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_twfuu")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.80005, -1.875)
+shape = SubResource("RectangleShape2D_tan2b")

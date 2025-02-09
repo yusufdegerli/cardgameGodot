@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://8o27nhxfxt3y"]
+[gd_scene load_steps=13 format=3 uid="uid://8o27nhxfxt3y"]
 
 [ext_resource type="Script" path="res://scripts/CardManager.gd" id="1_7aewm"]
 [ext_resource type="Script" path="res://scripts/PlayerHand.gd" id="3_6wa4f"]
@@ -6,13 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://cvtstd64rchqx" path="res://scenes/CardSlot.tscn" id="3_lmmn5"]
 [ext_resource type="PackedScene" uid="uid://b5w8gmftephlm" path="res://scenes/Opponent.tscn" id="4_1f61e"]
 [ext_resource type="Script" path="res://scripts/Deck.gd" id="4_wx1le"]
-[ext_resource type="Texture2D" uid="uid://domskrd028rdn" path="res://assets/real_deck.png" id="5_lasks"]
+[ext_resource type="Texture2D" uid="uid://cmf3bekqwgps1" path="res://assets/real_deck.png" id="5_lasks"]
 [ext_resource type="Script" path="res://scripts/InputManager.gd" id="6_qxqu3"]
 [ext_resource type="Script" path="res://scripts/OpponentHand.gd" id="6_tnce7"]
 [ext_resource type="Script" path="res://scripts/BattleManager.gd" id="9_7233s"]
 [ext_resource type="Script" path="res://scripts/OpponentDeck.gd" id="10_0f2vq"]
-[ext_resource type="FontFile" uid="uid://bcq55rv6noy7b" path="res://Tiny5-Regular.ttf" id="12_7tbey"]
-[ext_resource type="Texture2D" uid="uid://xsl83dgyxbbw" path="res://assets/CardSlot.png" id="13_8g15m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0lio"]
 size = Vector2(224, 252)
@@ -201,43 +199,5 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("9_7233s")
 
 [node name="BattleTimer" type="Timer" parent="."]
-
-[node name="PlayerHealth" type="RichTextLabel" parent="."]
-offset_left = 130.0
-offset_top = 530.0
-offset_right = 170.0
-offset_bottom = 570.0
-scale = Vector2(2, 2)
-theme_override_fonts/normal_font = ExtResource("12_7tbey")
-text = "0"
-
-[node name="OpponentHealth" type="RichTextLabel" parent="."]
-offset_left = 130.0
-offset_top = 230.0
-offset_right = 170.0
-offset_bottom = 270.0
-scale = Vector2(2, 2)
-theme_override_fonts/normal_font = ExtResource("12_7tbey")
-text = "0"
-
-[node name="PlayerDiscard" type="Node2D" parent="."]
-z_index = -3
-position = Vector2(1610, 650)
-scale = Vector2(0.7, 0.7)
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayerDiscard"]
-position = Vector2(-0.372095, 6.42863)
-scale = Vector2(1.237, 0.9)
-texture = ExtResource("13_8g15m")
-
-[node name="OpponentDiscard" type="Node2D" parent="."]
-z_index = -3
-position = Vector2(300, 200)
-scale = Vector2(0.7, 0.7)
-
-[node name="Sprite2D" type="Sprite2D" parent="OpponentDiscard"]
-position = Vector2(-0.372095, -20.7143)
-scale = Vector2(1.16287, 0.90027)
-texture = ExtResource("13_8g15m")
 
 [connection signal="pressed" from="EndTurnButton" to="BattleManager" method="_on_end_turn_button_pressed"]

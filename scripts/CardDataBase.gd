@@ -1,5 +1,7 @@
 # First attack point, second health point
 const CARDS = {
+#	ABILITIES
+	"Tornado" : [null, null, "Magic"],
 #	HUMANS
 	"HumanArcher" : [2, 4, "Human"],
 	"HumanKnight" : [5, 2, "Human"],
