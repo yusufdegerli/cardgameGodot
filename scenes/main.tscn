@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://cvtstd64rchqx" path="res://scenes/CardSlot.tscn" id="3_lmmn5"]
 [ext_resource type="PackedScene" uid="uid://b5w8gmftephlm" path="res://scenes/Opponent.tscn" id="4_1f61e"]
 [ext_resource type="Script" path="res://scripts/Deck.gd" id="4_wx1le"]
-[ext_resource type="Texture2D" uid="uid://domskrd028rdn" path="res://assets/real_deck.png" id="5_lasks"]
+[ext_resource type="Texture2D" uid="uid://cmf3bekqwgps1" path="res://assets/real_deck.png" id="5_lasks"]
 [ext_resource type="Script" path="res://scripts/InputManager.gd" id="6_qxqu3"]
 [ext_resource type="Script" path="res://scripts/OpponentHand.gd" id="6_tnce7"]
 [ext_resource type="Script" path="res://scripts/BattleManager.gd" id="9_7233s"]
 [ext_resource type="Script" path="res://scripts/OpponentDeck.gd" id="10_0f2vq"]
 [ext_resource type="FontFile" uid="uid://bcq55rv6noy7b" path="res://Tiny5-Regular.ttf" id="12_7tbey"]
-[ext_resource type="Texture2D" uid="uid://xsl83dgyxbbw" path="res://assets/CardSlot.png" id="13_8g15m"]
+[ext_resource type="Texture2D" uid="uid://bqigo1pwbcjia" path="res://assets/CardSlot.png" id="13_8g15m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0lio"]
 size = Vector2(224, 252)
