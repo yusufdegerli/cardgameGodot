@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ctdyhr71bptqc"]
 
 [ext_resource type="Script" path="res://scripts/OpponentCard.gd" id="1_bjq71"]
-[ext_resource type="Texture2D" uid="uid://domskrd028rdn" path="res://assets/real_deck.png" id="2_03vl6"]
+[ext_resource type="Texture2D" uid="uid://cmf3bekqwgps1" path="res://assets/real_deck.png" id="2_03vl6"]
 [ext_resource type="FontFile" uid="uid://bcq55rv6noy7b" path="res://Tiny5-Regular.ttf" id="4_7duxn"]
 
 [sub_resource type="Animation" id="Animation_7fu2m"]

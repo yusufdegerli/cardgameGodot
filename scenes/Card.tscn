@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/Card.gd" id="1_qcrv7"]
 [ext_resource type="Texture2D" uid="uid://cmf3bekqwgps1" path="res://assets/real_deck.png" id="2_ahonf"]
-[ext_resource type="Texture2D" uid="uid://bgc4ela81xm7r" path="res://assets/HumanSoldier.png" id="3_o60nw"]
+[ext_resource type="Texture2D" uid="uid://dy0vso3djtm1k" path="res://assets/HumanSoldier.png" id="3_o60nw"]
 [ext_resource type="FontFile" uid="uid://bcq55rv6noy7b" path="res://Tiny5-Regular.ttf" id="4_kv6cx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x82ay"]

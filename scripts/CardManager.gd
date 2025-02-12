@@ -6,6 +6,7 @@ const DEFAULT_CARD_MOVE_SPEED = 0.1
 const DEFAULT_CARD_SCALE = 0.8
 const CARD_BIGGER_SCALE = 0.85
 const CARD_SMALLER_SCALE = 0.8
+const ANIMATION_TORNADO = preload("res://scenes/AnimationTornado.tscn")
 
 var card_being_dragged
 var screen_size
@@ -52,8 +53,8 @@ func card_clicked(card):
 			return
 		if card in $"../BattleManager".player_cards_that_attacked_this_turn:
 			return
-		if card.card_type != "Monster":
-			return
+		#if card.card_type != "Monster":
+			#return
 		if $"../BattleManager".opponent_cards_on_battlefield.size() == 0:
 			$"../BattleManager".direct_attack(card, "Player")
 		else:
@@ -127,6 +128,13 @@ func finish_drag():
 				played_monster_card_this_turn = true
 			#else:
 			elif card_being_dragged.ability_script:
+				var animationScene = get_node("../AnimationTornado")
+				var tornadoNew =  ANIMATION_TORNADO.instantiate()
+				tornadoNew.position = Vector2(400, 300)
+				add_child(tornadoNew)
+				animationScene.animation()
+				if $"../AnimationTornado":
+					$"../AnimationTornado".visible = true
 				card_being_dragged.ability_script.trigger($"../BattleManager", card_being_dragged, $"../InputManager")
 			card_being_dragged = null
 			return

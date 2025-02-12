@@ -66,7 +66,10 @@ func draw_card():
 		new_card.health = card_database_reference.CARDS[card_drawn_name][1]
 		new_card.get_node("Health").text = str(new_card.health)
 	else:
-		new_card.get_node("Ability").visible = false
+		if card_database_reference.CARDS[card_drawn_name][3]:
+			new_card.get_node("Ability").text = card_database_reference.CARDS[card_drawn_name][3]
+		else:
+			new_card.get_node("Ability").visible = false
 		new_card.attack = card_database_reference.CARDS[card_drawn_name][0]
 		new_card.get_node("Attack").text = str(new_card.attack)
 		new_card.health = card_database_reference.CARDS[card_drawn_name][1]

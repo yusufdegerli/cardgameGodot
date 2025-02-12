@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://cb8vs4iqxx3fu"]
+
+[ext_resource type="Script" path="res://scripts/TornadoAnimation.gd" id="1_jos5r"]
+[ext_resource type="Texture2D" uid="uid://b6w7x0q6oyneh" path="res://assets/tornado1sprite.png" id="2_f3llw"]
+[ext_resource type="Texture2D" uid="uid://cslnbtl3s4coi" path="res://assets/tornado2sprite.png" id="2_rmqna"]
+[ext_resource type="Texture2D" uid="uid://dgy1ymvj1nyhw" path="res://assets/tornado3sprite.png" id="3_lwe34"]
+[ext_resource type="Texture2D" uid="uid://b4xakrqkdie6c" path="res://assets/tornado4sprite.png" id="4_3p7mw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3rmc"]
+atlas = ExtResource("2_rmqna")
+region = Rect2(0, 0, 201, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4jp6"]
+atlas = ExtResource("3_lwe34")
+region = Rect2(0, 0, 198, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elsat"]
+atlas = ExtResource("4_3p7mw")
+region = Rect2(0, 0, 206, 316)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctnr1"]
+atlas = ExtResource("2_f3llw")
+region = Rect2(0, 0, 209, 311)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_urams"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3rmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4jp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elsat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctnr1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(400, 300)
+script = ExtResource("1_jos5r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.7, 0.569)
+sprite_frames = SubResource("SpriteFrames_urams")
+frame_progress = 0.106949

@@ -1,5 +1,8 @@
 extends Node
 const TORNADO_DAMAGE = 1
+const ANIMATION_SCENE = "res://scenes/AnimationTornado.tscn"
+const ANIMATION_X = 400
+const ANIMATION_Y = 300
 
 func trigger(battle_manager_reference, card_with_ability, input_manager_reference):
 	input_manager_reference.inputs_disabled = true

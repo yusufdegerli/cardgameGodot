@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://8o27nhxfxt3y"]
+[gd_scene load_steps=16 format=3 uid="uid://8o27nhxfxt3y"]
 
 [ext_resource type="Script" path="res://scripts/CardManager.gd" id="1_7aewm"]
 [ext_resource type="Script" path="res://scripts/PlayerHand.gd" id="3_6wa4f"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/OpponentDeck.gd" id="10_0f2vq"]
 [ext_resource type="FontFile" uid="uid://bcq55rv6noy7b" path="res://Tiny5-Regular.ttf" id="12_7tbey"]
 [ext_resource type="Texture2D" uid="uid://bqigo1pwbcjia" path="res://assets/CardSlot.png" id="13_8g15m"]
+[ext_resource type="PackedScene" uid="uid://cb8vs4iqxx3fu" path="res://scenes/AnimationTornado.tscn" id="14_tw5yo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0lio"]
 size = Vector2(224, 252)
@@ -239,5 +240,8 @@ scale = Vector2(0.7, 0.7)
 position = Vector2(-0.372095, -20.7143)
 scale = Vector2(1.16287, 0.90027)
 texture = ExtResource("13_8g15m")
+
+[node name="AnimationTornado" parent="." instance=ExtResource("14_tw5yo")]
+visible = false
 
 [connection signal="pressed" from="EndTurnButton" to="BattleManager" method="_on_end_turn_button_pressed"]
