@@ -9,6 +9,7 @@ var card_type
 var health
 var attack
 var defeated = false
+var ability_script
 
 func _ready() -> void:
 	"""

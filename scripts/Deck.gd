@@ -4,9 +4,10 @@ const CARD_SCENE_PATH = "res://scenes/Card.tscn"
 const CARD_DRAW_SPEED = 1
 const STARTING_HAND_SIZE = 5
 
-var player_deck = ["Zombie", "SkeletonWizard", "Zombie", "PirateCannon", "Tornado", "HumanWizard", "Tornado", "Demon"]
+var player_deck = ["AbilityTornado", "SkeletonWizard", "AbilityTornado", "PirateCannon", "AbilityTornado", "HumanWizard", "AbilityTornado", "Demon"]
 var card_database_reference
 var drawn_card_this_turn = false
+var AbilityCards = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -65,13 +66,18 @@ func draw_card():
 		new_card.health = card_database_reference.CARDS[card_drawn_name][1]
 		new_card.get_node("Health").text = str(new_card.health)
 	else:
-		new_card.get_node("Health").visible = false
-		new_card.get_node("Attack").visible = false
-		print("res: ", card_database_reference.CARDS[card_drawn_name][3])
-		new_card.get_node("Ability").text = str(card_database_reference.CARDS[card_drawn_name][3])
-		#print("asdasd:", card_database_reference.CARDS[card_drawn_name][3])
-		#print("asdasd:", new_card.get_node("Abiltiy").name)
-		
+		new_card.get_node("Ability").visible = false
+		new_card.attack = card_database_reference.CARDS[card_drawn_name][0]
+		new_card.get_node("Attack").text = str(new_card.attack)
+		new_card.health = card_database_reference.CARDS[card_drawn_name][1]
+		new_card.get_node("Health").text = str(new_card.health)
+
+		var new_card_ability_script_path = card_database_reference.CARDS[card_drawn_name][4]
+		if new_card_ability_script_path:
+			new_card.ability_script = load(new_card_ability_script_path).new()
+			new_card.get_node("Health").visible = false
+			new_card.get_node("Attack").visible = false
+			new_card.get_node("Ability").text = str(card_database_reference.CARDS[card_drawn_name][3])
 	$"../CardManager".add_child(new_card)
 	new_card.name = "Card"
 	$"../PlayerHand".add_card_to_hand(new_card, CARD_DRAW_SPEED)
@@ -79,3 +85,10 @@ func draw_card():
 
 func reset_draw():
 	drawn_card_this_turn = false
+
+func card_is_ability_control(playerDeck):
+	for card in player_deck:
+		if "Ability" in card:
+			AbilityCards.append(card)
+	return AbilityCards
+	

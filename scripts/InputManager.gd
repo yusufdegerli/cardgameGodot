@@ -9,6 +9,7 @@ const COLLISION_MASK_OPPONENT_CARD = 8
 
 var card_manager_reference
 var deck_reference
+var inputs_disabled = false
 
 func _ready() -> void:
 	"""
@@ -59,6 +60,8 @@ func raycast_at_cursor():
 	EĞER KART DESTESİNE TIKLANMIŞSA
 		Deck.gd dosyasındaki drag_card() fonksionuyla, kart çekilir.
 	"""
+	if inputs_disabled:
+		return
 	var space_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()
 	parameters.position = get_global_mouse_position()

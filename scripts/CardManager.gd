@@ -45,15 +45,19 @@ func _process(delta: float) -> void:
 func card_clicked(card):
 	# Card if card on battlefield or in hand
 	if card.card_slot_card_is_in:
-		if $"../BattleManager".is_opponents_turn == false:
-			if $"../BattleManager".player_is_attacking == false:
-				# Card on battlefield
-				if card not in $"../BattleManager".player_cards_that_attacked_this_turn:
-					if $"../BattleManager".opponent_cards_on_battlefield.size() == 0:
-						$"../BattleManager".direct_attack(card, "Player")
-						return
-					else:
-						select_card_for_battle(card)
+		if $"../BattleManager".is_opponents_turn:
+			return
+			
+		if $"../BattleManager".player_is_attacking:
+			return
+		if card in $"../BattleManager".player_cards_that_attacked_this_turn:
+			return
+		if card.card_type != "Monster":
+			return
+		if $"../BattleManager".opponent_cards_on_battlefield.size() == 0:
+			$"../BattleManager".direct_attack(card, "Player")
+		else:
+			select_card_for_battle(card)
 	else:
 		# Card in hand
 		start_drag(card)
@@ -101,21 +105,31 @@ func finish_drag():
 	var card_slot_found = raycast_check_for_card_slot()
 	if card_slot_found and not card_slot_found.card_in_slot: # oc sorgu
 		if card_being_dragged.card_type == card_slot_found.card_slot_type:
-			if !played_human_card_this_turn:
-				played_human_card_this_turn = true
-			else:
-				played_monster_card_this_turn = true
-				card_being_dragged.scale = Vector2(CARD_SMALLER_SCALE, CARD_SMALLER_SCALE)
-				card_being_dragged.z_index = -1
-				is_hovering_on_card = false
-				card_being_dragged.card_slot_card_is_in = card_slot_found
-				player_hand_reference.remove_card_from_hand(card_being_dragged)
-				card_being_dragged.position = card_slot_found.position
-				card_slot_found.card_in_slot = true
-				card_slot_found.get_node("Area2D/CollisionShape2D").disabled = true
-				$"../BattleManager".player_cards_on_battlefield.append(card_being_dragged)
+			if card_being_dragged.card_type == "Monster" && played_monster_card_this_turn:
+				player_hand_reference.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
 				card_being_dragged = null
 				return
+			#if !played_human_card_this_turn:
+				#played_human_card_this_turn = true
+			#else:
+				#
+			card_being_dragged.scale = Vector2(CARD_SMALLER_SCALE, CARD_SMALLER_SCALE)
+			card_being_dragged.z_index = -1
+			is_hovering_on_card = false
+			card_being_dragged.card_slot_card_is_in = card_slot_found
+			player_hand_reference.remove_card_from_hand(card_being_dragged)
+			card_being_dragged.position = card_slot_found.position
+			card_slot_found.card_in_slot = true
+			card_slot_found.get_node("Area2D/CollisionShape2D").disabled = true
+			
+			if card_being_dragged.card_type == "Monster":
+				$"../BattleManager".player_cards_on_battlefield.append(card_being_dragged)
+				played_monster_card_this_turn = true
+			#else:
+			elif card_being_dragged.ability_script:
+				card_being_dragged.ability_script.trigger($"../BattleManager", card_being_dragged, $"../InputManager")
+			card_being_dragged = null
+			return
 	player_hand_reference.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
 	card_being_dragged = null
 
@@ -205,6 +219,10 @@ func highlight_card(card, hovered):
 	- `true` olduğunda, kart vurgulanır.
 	- `false` olduğunda, kart eski durumuna döner.
 	"""
+	# BURAYA HİÇ GİRMİYOR? BU YÜZDEN TETİKLENMİYO AMA GERİ KALAN ŞEYLER HALLOLDU GİBİ.
+	if card.card_slot_card_is_in: # Çalışmasa da olur galiba
+		print("AAAAA")
+		return
 	if hovered:
 		card.scale = Vector2(CARD_BIGGER_SCALE, CARD_BIGGER_SCALE)
 		card.z_index = 2

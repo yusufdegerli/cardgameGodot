@@ -230,4 +230,10 @@ func end_opponent_turn():
 	$"../EndTurnButton".disabled = false
 	$"../EndTurnButton".visible = true
 	
-	
+func enable_end_turn_button(is_enabled):
+	if is_enabled:
+		$"../EndTurnButton".visible = true
+		$"../EndTurnButton".disabled = false
+	else:
+		$"../EndTurnButton".disabled = false
+		$"../EndTurnButton".visible = true
