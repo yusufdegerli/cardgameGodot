@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://cb8vs4iqxx3fu"]
 
 [ext_resource type="Script" path="res://scripts/TornadoAnimation.gd" id="1_jos5r"]
-[ext_resource type="Texture2D" uid="uid://b6w7x0q6oyneh" path="res://assets/tornado1sprite.png" id="2_f3llw"]
-[ext_resource type="Texture2D" uid="uid://cslnbtl3s4coi" path="res://assets/tornado2sprite.png" id="2_rmqna"]
-[ext_resource type="Texture2D" uid="uid://dgy1ymvj1nyhw" path="res://assets/tornado3sprite.png" id="3_lwe34"]
-[ext_resource type="Texture2D" uid="uid://b4xakrqkdie6c" path="res://assets/tornado4sprite.png" id="4_3p7mw"]
+[ext_resource type="Texture2D" uid="uid://dypvm6ov0apn8" path="res://assets/tornado1sprite.png" id="2_f3llw"]
+[ext_resource type="Texture2D" uid="uid://dmnunj6bcxrlc" path="res://assets/tornado2sprite.png" id="2_rmqna"]
+[ext_resource type="Texture2D" uid="uid://d38pevti01atv" path="res://assets/tornado3sprite.png" id="3_lwe34"]
+[ext_resource type="Texture2D" uid="uid://dng6tqwpjd820" path="res://assets/tornado4sprite.png" id="4_3p7mw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g3rmc"]
 atlas = ExtResource("2_rmqna")

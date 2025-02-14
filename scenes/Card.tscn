@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://35g8j203e2fa"]
+[gd_scene load_steps=11 format=3 uid="uid://35g8j203e2fa"]
 
 [ext_resource type="Script" path="res://scripts/Card.gd" id="1_qcrv7"]
 [ext_resource type="Texture2D" uid="uid://cmf3bekqwgps1" path="res://assets/real_deck.png" id="2_ahonf"]
-[ext_resource type="Texture2D" uid="uid://dy0vso3djtm1k" path="res://assets/HumanSoldier.png" id="3_o60nw"]
+[ext_resource type="Texture2D" uid="uid://cn5w058rrcsht" path="res://assets/HumanSoldier.png" id="3_o60nw"]
 [ext_resource type="FontFile" uid="uid://bcq55rv6noy7b" path="res://Tiny5-Regular.ttf" id="4_kv6cx"]
+[ext_resource type="Texture2D" uid="uid://dd7somjpjsy42" path="res://assets/AbilityBallon.png" id="5_d6awl"]
+[ext_resource type="Script" path="res://scripts/AbilityBalloon.gd" id="6_c4047"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x82ay"]
 size = Vector2(208, 250)
@@ -223,7 +225,24 @@ offset_left = -73.0
 offset_top = 62.0
 offset_right = 82.0
 offset_bottom = 122.0
+theme_override_fonts/normal_font = ExtResource("4_kv6cx")
 text = "Default Text"
+
+[node name="AbilityBallon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(160.625, -158.75)
+scale = Vector2(1.11806, 1.10937)
+texture = ExtResource("5_d6awl")
+script = ExtResource("6_c4047")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AbilityBallon"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -61.0
+offset_top = -56.0
+offset_right = 73.0
+offset_bottom = 25.0
+theme_override_fonts/normal_font = ExtResource("4_kv6cx")
+text = "Default text desc."
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

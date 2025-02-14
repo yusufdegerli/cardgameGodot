@@ -49,8 +49,8 @@ func card_clicked(card):
 		if $"../BattleManager".is_opponents_turn:
 			return
 			
-		if $"../BattleManager".player_is_attacking:
-			return
+		#if $"../BattleManager".player_is_attacking:
+			#return
 		if card in $"../BattleManager".player_cards_that_attacked_this_turn:
 			return
 		#if card.card_type != "Monster":
@@ -126,16 +126,20 @@ func finish_drag():
 			if card_being_dragged.card_type == "Monster":
 				$"../BattleManager".player_cards_on_battlefield.append(card_being_dragged)
 				played_monster_card_this_turn = true
-			#else:
-			elif card_being_dragged.ability_script:
-				var animationScene = get_node("../AnimationTornado")
-				var tornadoNew =  ANIMATION_TORNADO.instantiate()
-				tornadoNew.position = Vector2(400, 300)
-				add_child(tornadoNew)
-				animationScene.animation()
-				if $"../AnimationTornado":
-					$"../AnimationTornado".visible = true
-				card_being_dragged.ability_script.trigger($"../BattleManager", card_being_dragged, $"../InputManager")
+			else:
+				if card_being_dragged.ability_script:
+			#elif card_being_dragged.ability_script:
+					var animationScene = get_node("../AnimationTornado")
+					if animationScene:
+						animationScene.animation()
+						animationScene.visible = true
+
+			#if $"../AnimationTornado":
+				#$"../AnimationTornado".visible = true
+		
+			if card_being_dragged.ability_script:
+				card_being_dragged.ability_script.trigger_ability($"../BattleManager", card_being_dragged, $"../InputManager", "card_placed")
+		
 			card_being_dragged = null
 			return
 	player_hand_reference.add_card_to_hand(card_being_dragged, DEFAULT_CARD_MOVE_SPEED)
@@ -228,10 +232,13 @@ func highlight_card(card, hovered):
 	- `false` olduğunda, kart eski durumuna döner.
 	"""
 	# BURAYA HİÇ GİRMİYOR? BU YÜZDEN TETİKLENMİYO AMA GERİ KALAN ŞEYLER HALLOLDU GİBİ.
+	
 	if card.card_slot_card_is_in: # Çalışmasa da olur galiba
 		print("AAAAA")
 		return
 	if hovered:
+		#var get_asd = get_node("res://scenes/Card.tscn")
+		#$AbilityBallon.visible = false
 		card.scale = Vector2(CARD_BIGGER_SCALE, CARD_BIGGER_SCALE)
 		card.z_index = 2
 	else:
@@ -326,6 +333,3 @@ func get_card_with_highest_z_index(cards):
 func reset_played_monster():
 	played_monster_card_this_turn = false
 	
-	
-	
-	# 10. video. dakika 5.32. 113.'ü satırda hata var.

@@ -13,7 +13,7 @@ var player_health
 var opponent_health
 var player_cards_that_attacked_this_turn = []
 var is_opponents_turn = false
-var player_is_attacking = false
+#var player_is_attacking = false
 
 func _ready() -> void:
 	battle_timer = $"../BattleTimer"
@@ -31,9 +31,18 @@ func _ready() -> void:
 	opponent_health = STARTING_HEALTH
 	$"../OpponentHealth".text = str(opponent_health)
 
+
+func direct_damage(damage):
+	opponent_health = max(0, opponent_health - damage)
+	$"../OpponentHealth".text = str(opponent_health)
+
+
 func _on_end_turn_button_pressed() -> void:
 	is_opponents_turn = true
 	$"../CardManager".unselect_selected_monster()
+	for card in player_cards_that_attacked_this_turn:
+		if card.ability_script:
+			card.ability_script.end_turn_reset()
 	player_cards_that_attacked_this_turn = []
 	opponent_turn()
 
@@ -79,9 +88,11 @@ func direct_attack(attacking_card, attacker):
 	if attacker == "Opponent":
 		new_pos_y = 1080
 	else:
-		$"../EndTurnButton".disabled = true
-		$"../EndTurnButton".visible = false
-		player_is_attacking = true
+		$"../InputManager".inputs_disabled = true
+		end_turn_button_enabled(false)
+		#$"../EndTurnButton".disabled = true
+		#$"../EndTurnButton".visible = false
+		#player_is_attacking = true
 		new_pos_y = 0
 		player_cards_that_attacked_this_turn.append(attacking_card)
 	var new_pos = Vector2(attacking_card.position.x, new_pos_y)
@@ -102,19 +113,21 @@ func direct_attack(attacking_card, attacker):
 	
 	var tween2 = get_tree().create_tween()
 	tween2.tween_property(attacking_card, "position", attacking_card.card_slot_card_is_in.position, CARD_MOVE_SPEED)
+
 	attacking_card.z_index = 0
 	await wait(1.0)
+
 	if attacker == "Player":
-		player_is_attacking = false
-		$"../EndTurnButton".disabled = false
-		$"../EndTurnButton".visible = true
+		if attacking_card.ability_script:
+			await attacking_card.ability_script.trigger_ability(self, attacking_card, $"../InputManager", "after_attack")
+		$"../InputManager".inputs_disabled = false
+		end_turn_button_enabled(true)
 
 
 func attack(attacking_card, defending_card, attacker):
 	if attacker == "Player":
-		player_is_attacking = true
-		$"../EndTurnButton".disabled = true
-		$"../EndTurnButton".visible = false
+		$"../InputManager".inputs_disabled = true
+		end_turn_button_enabled(false)
 		$"../CardManager".selected_monster = null
 		player_cards_that_attacked_this_turn.append(attacking_card)
 	
@@ -151,9 +164,10 @@ func attack(attacking_card, defending_card, attacker):
 		await wait(1.0)
 
 	if attacker == "Player":
-		player_is_attacking = false
-		$"../EndTurnButton".disabled = false
-		$"../EndTurnButton".visible = true
+		if attacking_card.ability_script:
+			await attacking_card.ability_script.trigger_ability(self, attacking_card, $"../InputManager", "after_attack")
+		$"../InputManager".inputs_disabled = false
+		end_turn_button_enabled(true)
 
 func destroy_card(card, card_owner):
 	# Move card to discard pile
@@ -180,7 +194,7 @@ func enemy_card_selected(defending_card):
 	var attacking_card = $"../CardManager".selected_monster
 	if attacking_card:
 		if defending_card in opponent_cards_on_battlefield:
-			if player_is_attacking == false:
+			if $"../InputManager".inputs_disabled == false:
 				$"../CardManager".selected_monster = null
 				attack(attacking_card,defending_card, "Player")
 
@@ -230,10 +244,10 @@ func end_opponent_turn():
 	$"../EndTurnButton".disabled = false
 	$"../EndTurnButton".visible = true
 	
-func enable_end_turn_button(is_enabled):
+func end_turn_button_enabled(is_enabled):
 	if is_enabled:
-		$"../EndTurnButton".visible = true
 		$"../EndTurnButton".disabled = false
+		$"../EndTurnButton".visible = true
 	else:
-		$"../EndTurnButton".disabled = false
-		$"../EndTurnButton".visible = true
+		$"../EndTurnButton".disabled = true
+		$"../EndTurnButton".visible = false

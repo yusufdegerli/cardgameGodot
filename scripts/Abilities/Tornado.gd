@@ -1,13 +1,15 @@
 extends Node
-const TORNADO_DAMAGE = 1
-const ANIMATION_SCENE = "res://scenes/AnimationTornado.tscn"
-const ANIMATION_X = 400
-const ANIMATION_Y = 300
 
-func trigger(battle_manager_reference, card_with_ability, input_manager_reference):
+const ABILITY_TRIGGER_EVENT = "card_placed"
+
+const TORNADO_DAMAGE = 1
+
+func trigger_ability(battle_manager_reference, card_with_ability, input_manager_reference, trigger_event):
+	if ABILITY_TRIGGER_EVENT != trigger_event:
+		return
+
 	input_manager_reference.inputs_disabled = true
-	battle_manager_reference.enable_end_turn_button(false)
-	battle_manager_reference.enable_end_turn_button(false)
+	battle_manager_reference.end_turn_button_enabled(false)
 
 	await battle_manager_reference.wait(1.0)
 	var cards_to_destroy = []
@@ -27,7 +29,7 @@ func trigger(battle_manager_reference, card_with_ability, input_manager_referenc
 			
 	battle_manager_reference.destroy_card(card_with_ability, "Player")
 	await battle_manager_reference.wait(1.0)
-	battle_manager_reference.enable_end_turn_button(true)
+	battle_manager_reference.end_turn_button_enabled(true)
 	input_manager_reference.inputs_disabled = false
 
 	

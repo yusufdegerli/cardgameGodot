@@ -10,12 +10,14 @@ const COLLISION_MASK_OPPONENT_CARD = 8
 var card_manager_reference
 var deck_reference
 var inputs_disabled = false
+var tmp
 
 func _ready() -> void:
 	"""
 	Node'ların referansları alıp, global_variable'lara verilir.
 	"""
 	card_manager_reference = $"../CardManager"
+	#tmp = $AbilityBallon/RichTextLabel
 	deck_reference = $"../Deck"
 
 
@@ -60,6 +62,10 @@ func raycast_at_cursor():
 	EĞER KART DESTESİNE TIKLANMIŞSA
 		Deck.gd dosyasındaki drag_card() fonksionuyla, kart çekilir.
 	"""
+	#var tmp = load("res://scenes/Card.tscn").instantiate()
+	#var rich_label = tmp.get_node("AbilityBallon/RichTextLabel")
+	#print("asdasds: ", rich_label.text)
+	#rich_label.visible = false
 	if inputs_disabled:
 		return
 	var space_state = get_world_2d().direct_space_state
