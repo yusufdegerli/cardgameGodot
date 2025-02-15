@@ -10,6 +10,7 @@ var health
 var attack
 var defeated = false
 var ability_script
+var ability_description
 
 func _ready() -> void:
 	"""
@@ -42,7 +43,7 @@ func _on_area_2d_mouse_entered() -> void:
 	hovered sinyali çalışır.
 	"""
 	emit_signal("hovered", self)# Nesnenin sinyalini yaymak için kullanılır.
-	$AbilityBallon.visible = true
+	#$AbilityBallon.visible = true
 
 
 func _on_area_2d_mouse_exited() -> void:
@@ -52,4 +53,4 @@ func _on_area_2d_mouse_exited() -> void:
 	hovered_off sinyali çalışır.
 	"""
 	emit_signal("hovered_off", self)
-	$AbilityBallon.visible = false
+	#$AbilityBallon.visible = false

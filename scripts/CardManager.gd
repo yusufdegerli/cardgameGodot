@@ -129,10 +129,11 @@ func finish_drag():
 			else:
 				if card_being_dragged.ability_script:
 			#elif card_being_dragged.ability_script:
-					var animationScene = get_node("../AnimationTornado")
-					if animationScene:
-						animationScene.animation()
-						animationScene.visible = true
+					if card_being_dragged.card_type == "Ability":
+						var animationScene = get_node("../AnimationTornado")
+						if animationScene:
+							animationScene.animation()
+							animationScene.visible = true
 
 			#if $"../AnimationTornado":
 				#$"../AnimationTornado".visible = true

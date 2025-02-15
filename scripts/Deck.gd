@@ -9,7 +9,6 @@ var card_database_reference
 var drawn_card_this_turn = false
 var AbilityCards = []
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	"""
 	Başlangıçta çalışır.
@@ -59,18 +58,20 @@ func draw_card():
 	var card_image_path = str("res://assets/" + card_drawn_name +".png")
 	new_card.get_node("CardImage").texture = load(card_image_path)
 	new_card.card_type = card_database_reference.CARDS[card_drawn_name][2]
-	new_card.get_node("Ability").visible = true
-	new_card.get_node("AbilityBallon/RichTextLabel").text = new_card.get_node("Ability").text
+	if new_card.card_type == "Ability":
+		new_card.get_node("Attack").visible = false
+		new_card.get_node("Health").visible = false
 	new_card.attack = card_database_reference.CARDS[card_drawn_name][0]
 	new_card.get_node("Attack").text = str(new_card.attack)
 	new_card.health = card_database_reference.CARDS[card_drawn_name][1]
 	new_card.get_node("Health").text = str(new_card.health)
+	new_card.ability_description = card_database_reference.CARDS[card_drawn_name][4]
+	new_card.get_node("Ability").text = str(card_database_reference.CARDS[card_drawn_name][4])
+	if !card_database_reference.CARDS[card_drawn_name][4]:
+		new_card.get_node("Ability").text = ""
 	var new_card_ability_script_path = card_database_reference.CARDS[card_drawn_name][3]
 	if new_card_ability_script_path:
 		new_card.ability_script = load(new_card_ability_script_path).new()
-		new_card.get_node("Ability").text = card_database_reference.CARDS[card_drawn_name][4]
-	else:
-		new_card.get_node("Ability").visible = false
 	$"../CardManager".add_child(new_card)
 	new_card.name = "Card"
 	$"../PlayerHand".add_card_to_hand(new_card, CARD_DRAW_SPEED)
@@ -84,40 +85,3 @@ func card_is_ability_control(playerDeck):
 		if "Ability" in card:
 			AbilityCards.append(card)
 	return AbilityCards
-	
-
-
-
-
-
-		#new_card.attack = card_database_reference.CARDS[card_drawn_name][0]
-		#new_card.get_node("Attack").text = str(new_card.attack)
-		#new_card.health = card_database_reference.CARDS[card_drawn_name][1]
-		#new_card.get_node("Health").text = str(new_card.health)
-
-		#new_card.health = card_database_reference.CARDS[card_drawn_name][1]
-		#new_card.attack = card_database_reference.CARDS[card_drawn_name][0]
-
-
-
-
-
-		#if card_database_reference.CARDS[card_drawn_name][3]: ### BUNLAR BENİM YAZDIĞIM
-			#new_card.get_node("AbilityBallon/RichTextLabel").text = ""
-			#new_card.get_node("AbilityBallon/RichTextLabel").visible = false # ÇALIŞMIYOR
-			#new_card.get_node("Ability").text = card_database_reference.CARDS[card_drawn_name][3]
-		#else:
-			#new_card.get_node("Ability").visible = false
-		#new_card.attack = card_database_reference.CARDS[card_drawn_name][0]
-		#new_card.get_node("Attack").text = str(new_card.attack)
-		#new_card.health = card_database_reference.CARDS[card_drawn_name][1]
-		#new_card.get_node("Health").text = str(new_card.health)
-		#new_card.get_node("AbilityBallon/RichTextLabel").text = card_database_reference.CARDS[card_drawn_name][3]
-		#var new_card_ability_script_path = card_database_reference.CARDS[card_drawn_name][4]
-
-		#if new_card_ability_script_path: # GALİBA BU GEREKSİZ--------------
-			#print("new: ", new_card_ability_script_path)
-			#new_card.ability_script = load(new_card_ability_script_path).new()
-			#new_card.get_node("Health").visible = false
-			#new_card.get_node("Attack").visible = false
-			#new_card.get_node("Ability").text = str(card_database_reference.CARDS[card_drawn_name][3])#--------------

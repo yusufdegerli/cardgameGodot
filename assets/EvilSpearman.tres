@@ -1,7 +1,0 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bbljkwcxyhdnc"]
-
-[ext_resource type="Texture2D" uid="uid://cpu5dopbxwq8c" path="res://assets/free_pixel_art_card_pack_resized.png" id="1_nf4tx"]
-
-[resource]
-atlas = ExtResource("1_nf4tx")
-region = Rect2(959.897, 2750.03, 259.906, 330.057)

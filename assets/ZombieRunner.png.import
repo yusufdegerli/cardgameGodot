@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctl2wrl4xodev"
-path="res://.godot/imported/ZombiRunner.png-b1707ec94e5f770aac914fa484657bb1.ctex"
+uid="uid://dqmn13ryh2fhb"
+path="res://.godot/imported/ZombieRunner.png-f27b2eb2a3f82c49a3a054486c8bc3d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ZombiRunner.png"
-dest_files=["res://.godot/imported/ZombiRunner.png-b1707ec94e5f770aac914fa484657bb1.ctex"]
+source_file="res://assets/ZombieRunner.png"
+dest_files=["res://.godot/imported/ZombieRunner.png-f27b2eb2a3f82c49a3a054486c8bc3d6.ctex"]
 
 [params]
 

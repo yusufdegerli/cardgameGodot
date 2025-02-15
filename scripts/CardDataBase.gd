@@ -2,7 +2,7 @@
 # Ability'lerin card slotlarının adı yanlış. Bundan dolayı bir tane daha car slotu eklenebilir.
 const CARDS = {
 #	ABILITIES
-	"AbilityTornado" : [null, null, "Human", "res://scripts/Abilities/Tornado.gd", "Deal 1 damage to all opponent cards"],
+	"AbilityTornado" : [null, null, "Ability", "res://scripts/Abilities/Tornado.gd", "Deal 1 damage to all opponent cards"],
 #	HUMANS
 	"HumanArcher" : [2, 4, "Human", "res://scripts/Abilities/Arrow.gd", "Ok da atarım..."],
 	"HumanKnight" : [5, 2, "Human", null, null],
@@ -34,7 +34,7 @@ const CARDS = {
 	"ZombieRunner" : [4, 3, "Monster", null, null],
 
 #	DEMONS
-	"Demon" : [1, 2, "Monster", null, "KADİR MISIRLIOĞLU NEREDE"],
+	"Demon" : [1, 2, "Monster", null, "KADİR MISIROĞLU NEREDE"],
 	"DemonFire" : [3, 5, "Monster", null, null],
 	"DemonSatan" : [6, 6, "Monster", null, null],
 	"DemonTrident" : [2, 4, "Monster", null, null],
