@@ -20,21 +20,21 @@ func _ready() -> void:
 	battle_timer.one_shot = true
 	battle_timer.wait_time = 1.0
 
-	empty_monster_card_slots.append($"../CardSlots/EnemyCardSlot1")
-	empty_monster_card_slots.append($"../CardSlots/EnemyCardSlot2")
-	empty_monster_card_slots.append($"../CardSlots/EnemyCardSlot3")
-	empty_monster_card_slots.append($"../CardSlots/EnemyCardSlot4")
-	empty_monster_card_slots.append($"../CardSlots/EnemyCardSlot5")
+	#empty_monster_card_slots.append($"../CardSlots/EnemyCardSlot1")
+	#empty_monster_card_slots.append($"../CardSlots/EnemyCardSlot2")
+	#empty_monster_card_slots.append($"../CardSlots/EnemyCardSlot3")
+	#empty_monster_card_slots.append($"../CardSlots/EnemyCardSlot4")
+	#empty_monster_card_slots.append($"../CardSlots/EnemyCardSlot5")
 
-	player_health = STARTING_HEALTH
-	$"../PlayerHealth".text = str(player_health)
-	opponent_health = STARTING_HEALTH
-	$"../OpponentHealth".text = str(opponent_health)
+	#player_health = STARTING_HEALTH
+	#$"../PlayerHealth".text = str(player_health)
+	#opponent_health = STARTING_HEALTH
+	#$"../OpponentHealth".text = str(opponent_health)
 
 
 func direct_damage(damage):
 	opponent_health = max(0, opponent_health - damage)
-	$"../OpponentHealth".text = str(opponent_health)
+	#$"../OpponentHealth".text = str(opponent_health)
 
 
 func _on_end_turn_button_pressed() -> void:
@@ -109,7 +109,7 @@ func direct_attack(attacking_card, attacker):
 		$"../PlayerHealth".text = str(player_health)
 	else:
 		opponent_health = max(0, opponent_health - attacking_card.attack)
-		$"../OpponentHealth".text = str(opponent_health)
+		#$"../OpponentHealth".text = str(opponent_health)
 	
 	var tween2 = get_tree().create_tween()
 	tween2.tween_property(attacking_card, "position", attacking_card.card_slot_card_is_in.position, CARD_MOVE_SPEED)

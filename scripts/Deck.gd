@@ -8,6 +8,7 @@ var player_deck = ["Demon", "AbilityTornado", "HumanArcher", "PirateCannon", "Hu
 var card_database_reference
 var drawn_card_this_turn = false
 var AbilityCards = []
+var deck_timer
 
 func _ready() -> void:
 	"""
@@ -17,14 +18,41 @@ func _ready() -> void:
 	Kartların database'ini alıp globa_variable'e eklemek.
 	"""
 	player_deck.shuffle()
-	$RichTextLabel.text = str(player_deck.size())
+	#$RichTextLabel.text = str(player_deck.size())
 	$RichTextLabel.bbcode_enabled = true
 	card_database_reference = preload("res://scripts/CardDataBase.gd")
+	deck_timer = $DeckTimer
+	deck_timer.one_shot = true
+	deck_timer.wait_time = 1.0
+	#for i in range(STARTING_HAND_SIZE):
+		#draw_card()
+		#drawn_card_this_turn = false
+	#drawn_card_this_turn = true
+
+func draw_initial_hand():
+	# Wait 1 second
+	deck_timer.start()
+	await deck_timer.timeout
+	
+	# Get the player id of the player who is drawing a card
+	# Host id will always be 1
+	var player_id = multiplayer.get_unique_id
 	for i in range(STARTING_HAND_SIZE):
-		draw_card()
+		# When we draw a card, we also want to replicate that on our client's opoonent field
+		draw_here_and_for_clients_opponent(player_id)
+		# Call the function for connected peers
+		rpc("draw_here_and_for_clients_opponent", player_id)
 		drawn_card_this_turn = false
 	drawn_card_this_turn = true
 
+@rpc("any_peer")
+func draw_here_and_for_clients_opponent(player_id):
+	# We need a way to know if this code was called locally or called on a client
+	# Get player id of who is running this code. If it is the same as player_id passed in then it was called locally.
+	if multiplayer.get_unique_id == player_id:
+		draw_card()
+	else:
+		get_parent().get_parent().get_node("OpponentField/OpponentDeck").draw_card()
 
 func draw_card():
 	"""

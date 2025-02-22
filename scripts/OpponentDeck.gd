@@ -6,6 +6,7 @@ const STARTING_HAND_SIZE = 5
 
 var opponent_deck = ["HumanArcher", "HumanWizard", "Skeleton", "HumanWizard", "HumanWizard", "HumanWizard", "Demon", "Demon"]
 var card_database_reference
+var deck_size
 
 func _ready() -> void:
 	"""
@@ -15,11 +16,11 @@ func _ready() -> void:
 	Kartların database'ini alıp globa_variable'e eklemek.
 	"""
 	opponent_deck.shuffle()
-	$RichTextLabel.text = str(opponent_deck.size())
+	#$RichTextLabel.text = str(opponent_deck.size())
 	$RichTextLabel.bbcode_enabled = true
 	card_database_reference = preload("res://scripts/CardDataBase.gd")
-	for i in range(STARTING_HAND_SIZE):
-		draw_card()
+	#for i in range(STARTING_HAND_SIZE):
+		#draw_card()
 
 
 func draw_card():

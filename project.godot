@@ -21,9 +21,6 @@ MagicCardSlot="*res://scripts/MagicCardSlot.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/stretch/scale=0.6
 window/vsync/vsync_mode=0
 
 [input]

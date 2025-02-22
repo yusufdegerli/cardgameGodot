@@ -9,7 +9,7 @@ const COLLISION_MASK_OPPONENT_CARD = 8
 
 var card_manager_reference
 var deck_reference
-var inputs_disabled = false
+var inputs_disabled = true
 var tmp
 
 func _ready() -> void:
