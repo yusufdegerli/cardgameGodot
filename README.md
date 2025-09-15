@@ -10,7 +10,7 @@
 
 ---
 
-![Oyun UI](screen1.png)
+![Oyun UI](github.com/yusufdegerli/cardgameGodot/screen1.png)
 
 ## 🎮 Oyun Hakkında
 
