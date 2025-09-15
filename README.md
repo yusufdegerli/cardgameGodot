@@ -10,6 +10,8 @@
 
 ---
 
+![Oyun UI](screen1.png)
+
 ## 🎮 Oyun Hakkında
 
 **Pixel Strategy Card Game**, Godot ile geliştirilmiş **2 boyutlu stratejik bir kart oyunudur**. Oyuncular, destelerindeki kartları **akıllıca ve stratejik bir şekilde** masaya koyarak rakibin destesini yok etmeye çalışır.  
